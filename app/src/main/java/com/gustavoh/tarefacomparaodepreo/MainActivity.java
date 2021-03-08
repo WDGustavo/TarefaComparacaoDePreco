@@ -14,17 +14,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    public void comparar(View view){
+    public void comparar(View view) {
         EditText steam = findViewById(R.id.editTextTextPersonName2);
         EditText epic = findViewById(R.id.editTextTextPersonName);
-        TextView resultado = findViewById((R.id.textView));
-        int precosteam = Integer.parseInt(steam.getText().toString().replaceAll(",", ""));
-        int precoepic = Integer.parseInt(epic.getText().toString().replaceAll(",", ""));
-        if(precosteam >precoepic){
-            resultado.setText("O melhor lugar pra comprar o jogo é a epic");
+        TextView resultadocomparacao = findViewById((R.id.textView));
+        try {
+        double precosteam = Double.parseDouble(steam.getText().toString());
+        double precoepic = Double.parseDouble(epic.getText().toString());
+
+        if (precosteam > precoepic) {
+            resultadocomparacao.setText("O melhor lugar pra comprar o jogo é a epic");
+        } else if (precosteam < precoepic) {
+            resultadocomparacao.setText("O melhor lugar pra comprar o jogo é a steam");
         }
-        else if(precosteam < precoepic){
-            resultado.setText("O melhor lugar pra comprar o jogo é a steam");
+    }catch(NumberFormatException num){
+            System.out.println("ERRO: " +num);
+            resultadocomparacao.setText("preencha os campos");
         }
     }
 }
